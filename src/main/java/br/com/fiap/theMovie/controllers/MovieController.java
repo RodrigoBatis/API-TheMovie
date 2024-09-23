@@ -14,7 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/movies")
+@RequestMapping("/movies")
 public class MovieController {
 
     private final MovieService service;
@@ -26,7 +26,6 @@ public class MovieController {
 
     @GetMapping
     public List<Movie> findAll(@RequestParam(required = false) Long userId){
-        if (userId != null) return service.findByUserId(userId);
         return service.findAll();
     }
 
@@ -61,5 +60,12 @@ public class MovieController {
     public ResponseEntity<Resource> getAvatar(@PathVariable String filename){
         return service.getPhoto(filename);
     }
+
+    @GetMapping("/{userId}")
+    public List<Movie> findByUserId(@RequestParam(required = false) Long userId){
+        if (userId != null) return service.findByUserId(userId);
+        return service.findByUserId(userId);
+    }
+
 
 }

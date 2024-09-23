@@ -26,7 +26,7 @@ public class TokenService {
         var expiresAt = LocalDateTime.now().plusHours(1).toInstant(ZoneOffset.ofHours(-3));
 
         String token = JWT.create()
-                .withIssuer("sphere")
+                .withIssuer("themovie")
                 .withSubject(user.getEmail())
                 .withClaim("role", "admin")
                 .withExpiresAt(expiresAt)
@@ -37,7 +37,7 @@ public class TokenService {
 
     public User getUserFromToken(String token) {
         var email =JWT.require(algorithm)
-                .withIssuer("sphere")
+                .withIssuer("themovie")
                 .build()
                 .verify(token)
                 .getSubject();
